@@ -14,3 +14,6 @@ DIFF_TYPES_TEST_TEXT = 'The 4 types of Sentence\r\n' \
 ERROR_LINES = ['File failed validation. File does not have a valid '
                   'extension. Allowed file extensions: '
                   '.pdf,.jpg,.png,.jpeg,.bmp,.gif,.tif,.tiff,.webp']
+
+
+SMALL_TEXT = "Legal Disclaimer"

@@ -1,4 +1,3 @@
-
 from tests import consts
 from utils import orc_engine
 from utils.utils import init_log
@@ -9,8 +8,9 @@ TEST_URL = 'http://i.imgur.com/31d5L5y.jpg'
 
 
 def test_login_fail():
+    log.info("-=> test_login_fail")
     try:
-        orc_engine.space_file(filename='a.jpg', api_key="ggg")
+        orc_engine.space_file(filename='the_image.jpg', api_key="ggg")
     except ConnectionError as e:
         pass
     else:
@@ -24,13 +24,14 @@ def test_login_fail():
 
 
 def test_login_success():
+    log.info("-=> test_login_success")
     out = orc_engine.space_url(url=TEST_URL)
     assert not out['IsErroredOnProcessing'], f'error on processing occurred.\n{out}'
     result = out['ParsedResults'][0]
     assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out}'
     assert result['ParsedText'] == consts.LINK_TEXT, f'plain text not as expected.\n{out}'
     assert result['TextOrientation'] == '0', f'Wrong text orientation.\n{out}'
-    out2 = orc_engine.space_file(filename='a.jpg')
+    out2 = orc_engine.space_file(filename='the_image.jpg')
     assert not out2['IsErroredOnProcessing'], f'error on processing occurred.\n{out2}'
     result = out2['ParsedResults'][0]
     assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out2}'
@@ -39,6 +40,7 @@ def test_login_success():
 
 
 def test_check_file_types():
+    log.info("-=> test_check_file_types")
     file_names = ['test_pic.bmp', 'test_pic.gif', 'test_pic.jpg', 'test_pic.pdf', 'test_pic.png', 'test_pic.tiff']
     for file_name in file_names:
         out = orc_engine.space_file(filename=file_name)
@@ -50,9 +52,17 @@ def test_check_file_types():
 
 
 def test_unsupported_pic_type():
+    log.info("-=> test_unsupported_pic_type")
     out = orc_engine.space_file(filename='test_pic.eps')
     assert out['IsErroredOnProcessing'], f'Expect to have an Error .\n{out}'
     assert out['OCRExitCode'] == 3, f'Wrong OCRExitCode .\n{out}'
-
     for error_line in consts.ERROR_LINES:
         assert error_line in out['ErrorMessage'], f"'{error_line}' was not found. {out['ErrorMessage']}"
+
+
+def test_small_text():
+    log.info("-=> test_small_text")
+    out = orc_engine.space_file(filename='task.pdf')
+    assert not out['IsErroredOnProcessing'], f'Expect to have an Error .\n{out}'
+    assert consts.SMALL_TEXT in out['ParsedResults'][0]['ParsedText'], \
+        f"Small test was not found. test: '{consts.SMALL_TEXT}\n{out}'\n"
