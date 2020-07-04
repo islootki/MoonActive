@@ -1,0 +1,435 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1593698128575)
++++ .idea/misc.xml	(date 1593698128575)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (SimpleGist)" project-jdk-type="Python SDK" />
++</project>
+\ No newline at end of file
+Index: .idea/moon.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/moon.iml	(date 1593698128563)
++++ .idea/moon.iml	(date 1593698128563)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++  <component name="TestRunnerService">
++    <option name="PROJECT_TEST_RUNNER" value="pytest" />
++  </component>
++</module>
+\ No newline at end of file
+Index: tests/utils.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tests/utils.py	(date 1593858166909)
++++ tests/utils.py	(date 1593858166909)
+@@ -0,0 +1,12 @@
++
++import logging
++
++
++def init_log():
++    from datetime import datetime
++    date_time = datetime.now().strftime("%d_%m_%H%M")
++    LOG_FILENAME = f'{date_time}_.log'
++    print(LOG_FILENAME)
++    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s',
++                        datefmt='%d/%m/%YT%H:%M:%S')
++    return logging
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/inspectionProfiles/Project_Default.xml	(date 1593698128532)
++++ .idea/inspectionProfiles/Project_Default.xml	(date 1593698128532)
+@@ -0,0 +1,54 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="PyBroadExceptionInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
++    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="ourVersions">
++        <value>
++          <list size="4">
++            <item index="0" class="java.lang.String" itemvalue="2.7" />
++            <item index="1" class="java.lang.String" itemvalue="3.6" />
++            <item index="2" class="java.lang.String" itemvalue="3.7" />
++            <item index="3" class="java.lang.String" itemvalue="3.8" />
++          </list>
++        </value>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="ignoredPackages">
++        <value>
++          <list size="3">
++            <item index="0" class="java.lang.String" itemvalue="vapi" />
++            <item index="1" class="java.lang.String" itemvalue="vastools" />
++            <item index="2" class="java.lang.String" itemvalue="pylibacl" />
++          </list>
++        </value>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
++      <option name="ignoredErrors">
++        <list>
++          <option value="E501" />
++        </list>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
++      <option name="ignoredErrors">
++        <list>
++          <option value="N806" />
++          <option value="N802" />
++          <option value="N803" />
++        </list>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="ignoredIdentifiers">
++        <list>
++          <option value="pysrc.tests.ha.ha_nvram_failure.RaidStateCode" />
++          <option value="pysrc.tests.ha.ha_nvram.ha_nvram_test.fio" />
++          <option value="Queue" />
++        </list>
++      </option>
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: tests/orc_engine.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tests/orc_engine.py	(date 1593858166908)
++++ tests/orc_engine.py	(date 1593858166908)
+@@ -0,0 +1,46 @@
++import requests
++
++
++def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'):
++    payload = {'isOverlayRequired': overlay,
++               'apikey': api_key,
++               'language': language,
++               }
++    with open(filename, 'rb') as f:
++        r = requests.post('https://api.ocr.space/parse/image',
++                          files={filename: f},
++                          data=payload,
++                          )
++    return r.content.decode()
++
++
++def ocr_space_url(url, overlay=False, api_key='helloworld', language='eng'):
++    """ OCR.space API request with remote file.
++        Python3.5 - not tested on 2.7
++    :param url: Image url.
++    :param overlay: Is OCR.space overlay required in your response.
++                    Defaults to False.
++    :param api_key: OCR.space API key.
++                    Defaults to 'helloworld'.
++    :param language: Language code to be used in OCR.
++                    List of available language codes can be found on https://ocr.space/OCRAPI
++                    Defaults to 'en'.
++    :return: Result in JSON format.
++    """
++
++    payload = {'url': url,
++               'isOverlayRequired': overlay,
++               'apikey': api_key,
++               'language': language,
++               }
++    r = requests.post('https://api.ocr.space/parse/image',
++                      data=payload,
++                      )
++    return r.content.decode()
++
++
++# Use examples:
++test_file = ocr_space_file(filename='a.jpg', api_key='ggg', language='eng')
++test_url = ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
++print(test_file)
++print(test_url)
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/inspectionProfiles/profiles_settings.xml	(date 1593698128588)
++++ .idea/inspectionProfiles/profiles_settings.xml	(date 1593698128588)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(date 1593698128581)
++++ .idea/modules.xml	(date 1593698128581)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/moon.iml" filepath="$PROJECT_DIR$/.idea/moon.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: tests/tests.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tests/tests.py	(revision 0c5661ef05c5043000b2282ff70b1b7b47f4c115)
++++ tests/tests.py	(date 1593858166909)
+@@ -1,0 +1,13 @@
++
++
++from tests.utils import init_log
++
++logging = init_log()
++
++
++def test_1():
++    logging.debug('This message should go to the log file')
++    logging.debug('This message should go to the log file')
++    logging.info('very_good!')
++    assert 1 == 1
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"046a8204-769c-43f5-a028-f3845cc97f89\" name=\"Default Changelist\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/tests/tests.py\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/utils/utils.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1e8FUV04e9OIEIlkEHbceBmOhLf\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"046a8204-769c-43f5-a028-f3845cc97f89\" name=\"Default Changelist\" comment=\"\" />\n      <created>1593695329002</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1593695329002</updated>\n    </task>\n    <servers />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 0c5661ef05c5043000b2282ff70b1b7b47f4c115)
++++ .idea/workspace.xml	(date 1593858359048)
+@@ -1,12 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
+-    </list>
++    <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -32,6 +27,89 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++  </component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/tests" />
++      <recent name="$PROJECT_DIR$" />
++    </key>
++  </component>
++  <component name="RunManager" selected="Python.tests">
++    <configuration name="orc_engine" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="moon" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/orc_engine.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="moon" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/tests.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <configuration name="ttt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="moon" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/ttt.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <list>
++      <item itemvalue="Python.orc_engine" />
++      <item itemvalue="Python.tests" />
++      <item itemvalue="Python.ttt" />
++    </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Python.tests" />
++        <item itemvalue="Python.orc_engine" />
++        <item itemvalue="Python.ttt" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SvnConfiguration">
+     <configuration />
+@@ -44,6 +122,95 @@
+       <option name="presentableId" value="Default" />
+       <updated>1593695329002</updated>
+     </task>
++    <task id="LOCAL-00001">
++      <created>1593857974033</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1593857974033</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
++  <component name="VcsManagerConfiguration">
++    <option name="LAST_COMMIT_MESSAGE" value="" />
++  </component>
++  <component name="WindowStateProjectService">
++    <state x="0" y="23" width="1440" height="877" key="#Log_Highlighting_(ideolog)" timestamp="1593698376566">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="0" y="23" width="1440" height="877" key="#Log_Highlighting_(ideolog)/0.23.1440.877@0.23.1440.877" timestamp="1593698376566" />
++    <state x="502" y="321" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1593700000196">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="502" y="321" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.23.1440.877@0.23.1440.877" timestamp="1593700000196" />
++    <state width="1419" height="223" key="GridCell.Tab.0.bottom" timestamp="1593858247249">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="223" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593858247249" />
++    <state width="1419" height="223" key="GridCell.Tab.0.center" timestamp="1593858247249">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="223" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593858247249" />
++    <state width="1419" height="223" key="GridCell.Tab.0.left" timestamp="1593858247249">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="223" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593858247249" />
++    <state width="1419" height="223" key="GridCell.Tab.0.right" timestamp="1593858247249">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="223" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593858247249" />
++    <state width="1419" height="276" key="GridCell.Tab.1.bottom" timestamp="1593858247244">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="276" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593858247244" />
++    <state width="1419" height="276" key="GridCell.Tab.1.center" timestamp="1593858247244">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="276" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1593858247244" />
++    <state width="1419" height="276" key="GridCell.Tab.1.left" timestamp="1593858247243">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="276" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1593858247243" />
++    <state width="1419" height="276" key="GridCell.Tab.1.right" timestamp="1593858247244">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state width="1419" height="276" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1593858247244" />
++    <state x="524" y="171" key="RollbackChangesDialog" timestamp="1593858100954">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="524" y="171" key="RollbackChangesDialog/0.23.1440.877@0.23.1440.877" timestamp="1593858100954" />
++    <state x="100" y="123" width="1240" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1593699045821">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1440.877@0.23.1440.877" timestamp="1593699045821" />
++    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593849239527">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1593849239527" />
++    <state x="99" y="122" width="1240" height="677" key="dock-window-1" timestamp="1593858247379">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="99" y="122" width="1240" height="677" key="dock-window-1/0.23.1440.877@0.23.1440.877" timestamp="1593858247379" />
++    <state x="100" y="123" width="1240" height="677" key="dock-window-2" timestamp="1593858247379">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="dock-window-2/0.23.1440.877@0.23.1440.877" timestamp="1593858247379" />
++    <state x="100" y="123" width="1240" height="677" key="dock-window-3" timestamp="1593858247380">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="dock-window-3/0.23.1440.877@0.23.1440.877" timestamp="1593858247380" />
++    <state x="100" y="123" width="1240" height="677" key="dock-window-4" timestamp="1593858247380">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="dock-window-4/0.23.1440.877@0.23.1440.877" timestamp="1593858247380" />
++    <state x="100" y="123" width="1240" height="677" key="dock-window-5" timestamp="1593858247380">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="dock-window-5/0.23.1440.877@0.23.1440.877" timestamp="1593858247380" />
++    <state x="100" y="123" width="1240" height="677" key="dock-window-6" timestamp="1593858247380">
++      <screen x="0" y="23" width="1440" height="877" />
++    </state>
++    <state x="100" y="123" width="1240" height="677" key="dock-window-6/0.23.1440.877@0.23.1440.877" timestamp="1593858247380" />
++  </component>
+ </project>
+\ No newline at end of file

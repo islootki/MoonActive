@@ -1,6 +1,6 @@
 
 
-from tests.utils import init_log
+from utils.utils import init_log
 
 logging = init_log()
 

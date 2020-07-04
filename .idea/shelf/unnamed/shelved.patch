@@ -1,0 +1,207 @@
+Index: tests/orc_engine.py
+===================================================================
+--- tests/orc_engine.py	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
++++ tests/orc_engine.py	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
+@@ -1,46 +0,0 @@
+-import requests
+-
+-
+-def ocr_space_file(filename, overlay=False, api_key='helloworld', language='eng'):
+-    payload = {'isOverlayRequired': overlay,
+-               'apikey': api_key,
+-               'language': language,
+-               }
+-    with open(filename, 'rb') as f:
+-        r = requests.post('https://api.ocr.space/parse/image',
+-                          files={filename: f},
+-                          data=payload,
+-                          )
+-    return r.content.decode()
+-
+-
+-def ocr_space_url(url, overlay=False, api_key='helloworld', language='eng'):
+-    """ OCR.space API request with remote file.
+-        Python3.5 - not tested on 2.7
+-    :param url: Image url.
+-    :param overlay: Is OCR.space overlay required in your response.
+-                    Defaults to False.
+-    :param api_key: OCR.space API key.
+-                    Defaults to 'helloworld'.
+-    :param language: Language code to be used in OCR.
+-                    List of available language codes can be found on https://ocr.space/OCRAPI
+-                    Defaults to 'en'.
+-    :return: Result in JSON format.
+-    """
+-
+-    payload = {'url': url,
+-               'isOverlayRequired': overlay,
+-               'apikey': api_key,
+-               'language': language,
+-               }
+-    r = requests.post('https://api.ocr.space/parse/image',
+-                      data=payload,
+-                      )
+-    return r.content.decode()
+-
+-
+-# Use examples:
+-test_file = ocr_space_file(filename='a.jpg', api_key='ggg', language='eng')
+-test_url = ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
+-print(test_file)
+-print(test_url)
+\ No newline at end of file
+Index: tests/utils.py
+===================================================================
+--- tests/utils.py	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
++++ tests/utils.py	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
+@@ -1,12 +0,0 @@
+-
+-import logging
+-
+-
+-def init_log():
+-    from datetime import datetime
+-    date_time = datetime.now().strftime("%d_%m_%H%M")
+-    LOG_FILENAME = f'{date_time}_.log'
+-    print(LOG_FILENAME)
+-    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s',
+-                        datefmt='%d/%m/%YT%H:%M:%S')
+-    return logging
+\ No newline at end of file
+Index: tests/tests.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\n\nfrom tests.utils import init_log\n\nlogging = init_log()\n\n\ndef test_1():\n    logging.debug('This message should go to the log file')\n    logging.debug('This message should go to the log file')\n    logging.info('very_good!')\n    assert 1 == 1\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tests/tests.py	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
++++ tests/tests.py	(date 1593857927460)
+@@ -1,13 +1,21 @@
++from utils import utils
+ 
++log = utils.init_log()
+ 
+-from tests.utils import init_log
++IMAGE_PATH = "a.jpg"
+ 
+-logging = init_log()
+ 
+-
+-def test_1():
+-    logging.debug('This message should go to the log file')
+-    logging.debug('This message should go to the log file')
+-    logging.info('very_good!')
+-    assert 1 == 1
+-
++def log_succeed():
++    from testing.utils import orc_engine
++    print('----------= 1 stat test')
++    test_file = orc_engine.ocr_space_file(filename=IMAGE_PATH, language='eng')
++    print('----------= 2 test_file={}'.format(test_file))
++    validate_output(test_file)
++    # test_url = orc_engine.ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
++    # validate_output(test_url)
++    
++    
++def validate_output(out):
++    from pprint import pformat, pprint
++    log.info(pformat(out))
++    pprint(out)
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># MoonActive\nFor interview\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
++++ README.md	(date 1593855478220)
+@@ -1,2 +1,1 @@
+-# MoonActive
+-For interview
++# ReadMe
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Byte-compiled / optimized / DLL files\n__pycache__/\n*.py[cod]\n*$py.class\n\n# C extensions\n*.so\n\n# Distribution / packaging\n.Python\nbuild/\ndevelop-eggs/\ndist/\ndownloads/\neggs/\n.eggs/\nlib/\nlib64/\nparts/\nsdist/\nvar/\nwheels/\npip-wheel-metadata/\nshare/python-wheels/\n*.egg-info/\n.installed.cfg\n*.egg\nMANIFEST\n\n# PyInstaller\n#  Usually these files are written by a python script from a template\n#  before PyInstaller builds the exe, so as to inject date/other infos into it.\n*.manifest\n*.spec\n\n# Installer logs\npip-log.txt\npip-delete-this-directory.txt\n\n# Unit test / coverage reports\nhtmlcov/\n.tox/\n.nox/\n.coverage\n.coverage.*\n.cache\nnosetests.xml\ncoverage.xml\n*.cover\n*.py,cover\n.hypothesis/\n.pytest_cache/\n\n# Translations\n*.mo\n*.pot\n\n# Django stuff:\n*.log\nlocal_settings.py\ndb.sqlite3\ndb.sqlite3-journal\n\n# Flask stuff:\ninstance/\n.webassets-cache\n\n# Scrapy stuff:\n.scrapy\n\n# Sphinx documentation\ndocs/_build/\n\n# PyBuilder\ntarget/\n\n# Jupyter Notebook\n.ipynb_checkpoints\n\n# IPython\nprofile_default/\nipython_config.py\n\n# pyenv\n.python-version\n\n# pipenv\n#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.\n#   However, in case of collaboration, if having platform-specific dependencies or dependencies\n#   having no cross-platform support, pipenv may install dependencies that don't work, or not\n#   install all needed dependencies.\n#Pipfile.lock\n\n# PEP 582; used by e.g. github.com/David-OConnor/pyflow\n__pypackages__/\n\n# Celery stuff\ncelerybeat-schedule\ncelerybeat.pid\n\n# SageMath parsed files\n*.sage.py\n\n# Environments\n.env\n.venv\nenv/\nvenv/\nENV/\nenv.bak/\nvenv.bak/\n\n# Spyder project settings\n.spyderproject\n.spyproject\n\n# Rope project settings\n.ropeproject\n\n# mkdocs documentation\n/site\n\n# mypy\n.mypy_cache/\n.dmypy.json\ndmypy.json\n\n# Pyre type checker\n.pyre/\n\n # *.log
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision ec0e5b89b2b70917e9f730b577c8d20995325bfe)
++++ .gitignore	(date 1593857961089)
+@@ -127,5 +127,3 @@
+ 
+ # Pyre type checker
+ .pyre/
+-
+- # *.log
+\ No newline at end of file
+Index: utils/orc_engine.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- utils/orc_engine.py	(date 1593857474635)
++++ utils/orc_engine.py	(date 1593857474635)
+@@ -0,0 +1,52 @@
++import json
++import os
++from testing.utils import utils
++log = utils.init_log()
++import requests
++
++
++IMAGES = "images"
++
++
++def ocr_space_file(filename, overlay=False, api_key='6d14c0073188957', language='eng'):
++    """
++    The images that should be for test should be placed in images
++    dir `ocr_space_file` should only get the file name
++    :return: dict
++    """
++    log.debug(f"ocr_space_file params: filename={filename}, overlay={overlay}, api_key={api_key}, language={language}")
++    payload = {'isOverlayRequired': overlay,
++               'apikey': api_key,
++               'language': language,
++               }
++    filename = os.path.join(os.path.realpath('.').split('testing')[0], IMAGES, filename)
++    with open(filename, 'rb') as f:
++        r = requests.post('https://api.ocr.space/parse/image',
++                          files={filename: f},
++                          data=payload,
++                          )
++    t = r.content.decode()
++    return json.loads(t)
++
++
++def ocr_space_url(url, overlay=False, api_key='helloworld', language='eng'):
++    
++    log.debug(f"ocr_space_file params: url={url}, overlay={overlay}, api_key={api_key}, language={language}")
++    
++    payload = {'url': url,
++               'isOverlayRequired': overlay,
++               'apikey': api_key,
++               'language': language,
++               }
++    r = requests.post('https://api.ocr.space/parse/image',
++                      data=payload,
++                      )
++    return json.loads(r.content.decode())
++
++
++# Use examples:
++# test_file = ocr_space_file(filename="a.jpg", language='eng')
++# # test_url = ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
++# # print(type(test_file))
++# print(test_file)
++# # print(test_url)
+\ No newline at end of file
+diff --git tests/__init__.py testing/__init__.py
+rename from tests/__init__.py
+rename to testing/__init__.py
+diff --git tests/test_utils.py tests/test_utils.py
+new file mode 100644
+diff --git utils/__init__.py utils/__init__.py
+new file mode 100644

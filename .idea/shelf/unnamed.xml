@@ -1,0 +1,9 @@
+<changelist name="unnamed" date="1593857973507" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/unnamed/shelved.patch" />
+  <option name="DESCRIPTION" value="" />
+  <binary>
+    <option name="BEFORE_PATH" value="tests/a.jpg" />
+    <option name="AFTER_PATH" value="images/a.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/unnamed/a.jpg" />
+  </binary>
+</changelist>
