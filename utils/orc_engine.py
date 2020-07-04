@@ -46,4 +46,5 @@ def check_output(r):
     if r.status_code == 403:
         raise ConnectionError(f'{r.__dict__}')
     assert r.status_code == 200, f'{r.__dict__}'
+    log.info(r.content.decode())
     return json.loads(r.content.decode())

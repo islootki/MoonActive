@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/a.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images_dir/a.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/orc_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/orc_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/orc_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/orc_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,5 +169,9 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1593862686806" />
+    <state x="418" y="216" width="604" height="490" key="find.popup" timestamp="1593863931433">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="418" y="216" width="604" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1593863931433" />
   </component>
 </project>
