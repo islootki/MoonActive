@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.tiff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/consts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/orc_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/orc_engine.py" afterDir="false" />
     </list>
@@ -145,22 +153,22 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1593858594183" />
-    <state width="709" height="223" key="GridCell.Tab.0.bottom" timestamp="1593860993087">
+    <state width="709" height="223" key="GridCell.Tab.0.bottom" timestamp="1593869791444">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593860993087" />
-    <state width="709" height="223" key="GridCell.Tab.0.center" timestamp="1593860993086">
+    <state width="709" height="223" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593869791444" />
+    <state width="709" height="223" key="GridCell.Tab.0.center" timestamp="1593869791443">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593860993086" />
-    <state width="709" height="223" key="GridCell.Tab.0.left" timestamp="1593860993085">
+    <state width="709" height="223" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593869791443" />
+    <state width="709" height="223" key="GridCell.Tab.0.left" timestamp="1593869791443">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593860993085" />
-    <state width="709" height="223" key="GridCell.Tab.0.right" timestamp="1593860993086">
+    <state width="709" height="223" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593869791443" />
+    <state width="709" height="223" key="GridCell.Tab.0.right" timestamp="1593869791444">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593860993086" />
+    <state width="709" height="223" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593869791444" />
     <state x="100" y="123" width="1240" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1593699045821">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
