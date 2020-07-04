@@ -47,6 +47,7 @@
           <option value="pysrc.tests.ha.ha_nvram_failure.RaidStateCode" />
           <option value="pysrc.tests.ha.ha_nvram.ha_nvram_test.fio" />
           <option value="Queue" />
+          <option value="tests.tests._logging" />
         </list>
       </option>
     </inspection_tool>
