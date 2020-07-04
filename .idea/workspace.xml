@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/a.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images_dir/a.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/orc_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/orc_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +35,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images_dir" />
       <recent name="$PROJECT_DIR$/utils" />
+      <recent name="$PROJECT_DIR$/main_dir" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -52,7 +55,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/orc_engine.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/orc_engine.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,29 +145,29 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1593858594183" />
-    <state width="1419" height="223" key="GridCell.Tab.0.bottom" timestamp="1593858711752">
+    <state width="709" height="223" key="GridCell.Tab.0.bottom" timestamp="1593860993087">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593858711752" />
-    <state width="1419" height="223" key="GridCell.Tab.0.center" timestamp="1593858711752">
+    <state width="709" height="223" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593860993087" />
+    <state width="709" height="223" key="GridCell.Tab.0.center" timestamp="1593860993086">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593858711752" />
-    <state width="1419" height="223" key="GridCell.Tab.0.left" timestamp="1593858711751">
+    <state width="709" height="223" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593860993086" />
+    <state width="709" height="223" key="GridCell.Tab.0.left" timestamp="1593860993085">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593858711751" />
-    <state width="1419" height="223" key="GridCell.Tab.0.right" timestamp="1593858711752">
+    <state width="709" height="223" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593860993085" />
+    <state width="709" height="223" key="GridCell.Tab.0.right" timestamp="1593860993086">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593858711752" />
+    <state width="709" height="223" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593860993086" />
     <state x="100" y="123" width="1240" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1593699045821">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1440.877@0.23.1440.877" timestamp="1593699045821" />
-    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593849239527">
+    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593862686806">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1593849239527" />
+    <state x="343" y="79" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1593862686806" />
   </component>
 </project>
