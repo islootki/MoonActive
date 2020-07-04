@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="046a8204-769c-43f5-a028-f3845cc97f89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images_dir/test_pic.tiff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/consts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/orc_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/orc_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

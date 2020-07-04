@@ -10,3 +10,7 @@ DIFF_TYPES_TEST_TEXT = 'The 4 types of Sentence\r\n' \
                        '2 interrogative? question?\r\n' \
                        '3 imperative. command!\r\n' \
                        '4 exclamative! exclamation!\r\n'
+
+ERROR_LINES = ['File failed validation. File does not have a valid '
+                  'extension. Allowed file extensions: '
+                  '.pdf,.jpg,.png,.jpeg,.bmp,.gif,.tif,.tiff,.webp']

@@ -21,7 +21,7 @@ def test_login_fail():
         pass
     else:
         raise Exception("The api successfully log in with wrong credentials")
-    
+
 
 def test_login_success():
     out = orc_engine.space_url(url=TEST_URL)
@@ -47,3 +47,12 @@ def test_check_file_types():
         assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out}'
         assert result['ParsedText'] == consts.DIFF_TYPES_TEST_TEXT, f'plain text not as expected.\n{out}'
         assert result['TextOrientation'] == '0', f'Wrong text orientation.\n{out}'
+
+
+def test_unsupported_pic_type():
+    out = orc_engine.space_file(filename='test_pic.eps')
+    assert out['IsErroredOnProcessing'], f'Expect to have an Error .\n{out}'
+    assert out['OCRExitCode'] == 3, f'Wrong OCRExitCode .\n{out}'
+
+    for error_line in consts.ERROR_LINES:
+        assert error_line in out['ErrorMessage'], f"'{error_line}' was not found. {out['ErrorMessage']}"
