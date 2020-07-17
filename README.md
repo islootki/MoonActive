@@ -1,9 +1,10 @@
-# MoonActive
-Before running the test please install:
+# General notes
+- To verify the DB an expected data saved in json format `test_table.json` in `data_source` folder.
+- The table was created with primary key, `CODE` column. 
+
+# To run the test
+Please install:
 - pip install pytest
 
-To run the test, please, got to root dir (moon) of the project and run 'pytest -q tests/tests.py'. 
-
-NOTE: The last test `test_small_text`  should fail, the api does not parse small font.
-
-The log files saved in `moon/log_dir`
+Then go to root dir of the project and run: 
+- `pytest -q tests/tests.py` 

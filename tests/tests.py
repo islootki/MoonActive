@@ -1,68 +1,37 @@
-from tests import consts
-from utils import orc_engine
-from utils.utils import init_log
+
+from utils import consts
+from utils.sql_conn import select_all
+from utils.utils import init_log, get_expected_data
 
 log = init_log()
 
-TEST_URL = 'http://i.imgur.com/31d5L5y.jpg'
 
-
-def test_login_fail():
-    log.info("-=> test_login_fail")
-    try:
-        orc_engine.space_file(filename='the_image.jpg', api_key="ggg")
-    except ConnectionError as e:
-        pass
-    else:
-        raise Exception("The api successfully log in with wrong credentials")
-    try:
-        orc_engine.space_url(url=TEST_URL, api_key="ggg")
-    except ConnectionError as e:
-        pass
-    else:
-        raise Exception("The api successfully log in with wrong credentials")
-
-
-def test_login_success():
-    log.info("-=> test_login_success")
-    out = orc_engine.space_url(url=TEST_URL)
-    assert not out['IsErroredOnProcessing'], f'error on processing occurred.\n{out}'
-    result = out['ParsedResults'][0]
-    assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out}'
-    assert result['ParsedText'] == consts.LINK_TEXT, f'plain text not as expected.\n{out}'
-    assert result['TextOrientation'] == '0', f'Wrong text orientation.\n{out}'
-    out2 = orc_engine.space_file(filename='the_image.jpg')
-    assert not out2['IsErroredOnProcessing'], f'error on processing occurred.\n{out2}'
-    result = out2['ParsedResults'][0]
-    assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out2}'
-    assert result['ParsedText'] == consts.FILE_TEXT, f'plain text not as expected.\n{out2}'
-    assert result['TextOrientation'] == '0', f'Wrong text orientation.\n{out2}'
-
-
-def test_check_file_types():
-    log.info("-=> test_check_file_types")
-    file_names = ['test_pic.bmp', 'test_pic.gif', 'test_pic.jpg', 'test_pic.pdf', 'test_pic.png', 'test_pic.tiff']
-    for file_name in file_names:
-        out = orc_engine.space_file(filename=file_name)
-        assert not out['IsErroredOnProcessing'], f'error on processing occurred.\n{out}'
-        result = out['ParsedResults'][0]
-        assert result['FileParseExitCode'] == 1, f'Parsing exit code error, Expected: 1.{out}'
-        assert result['ParsedText'] == consts.DIFF_TYPES_TEST_TEXT, f'plain text not as expected.\n{out}'
-        assert result['TextOrientation'] == '0', f'Wrong text orientation.\n{out}'
-
-
-def test_unsupported_pic_type():
-    log.info("-=> test_unsupported_pic_type")
-    out = orc_engine.space_file(filename='test_pic.eps')
-    assert out['IsErroredOnProcessing'], f'Expect to have an Error .\n{out}'
-    assert out['OCRExitCode'] == 3, f'Wrong OCRExitCode .\n{out}'
-    for error_line in consts.ERROR_LINES:
-        assert error_line in out['ErrorMessage'], f"'{error_line}' was not found. {out['ErrorMessage']}"
-
-
-def test_small_text():
-    log.info("-=> test_small_text")
-    out = orc_engine.space_file(filename='task.pdf')
-    assert not out['IsErroredOnProcessing'], f'Expect to have an Error .\n{out}'
-    assert consts.SMALL_TEXT in out['ParsedResults'][0]['ParsedText'], \
-        f"Small test was not found. test: '{consts.SMALL_TEXT}\n{out}'\n"
+def test_validate_data_in_db():
+    tested_table_name = "test_table"
+    # read all data from DB and validate
+    raw_data = select_all(tested_table_name)
+    actual_data = []
+    # convert all data from DB to dict
+    for line in raw_data:
+        actual_data.append(dict(zip(consts.DB_COLUMNS, line)))
+    # get expected data from json
+    expected_data = get_expected_data(tested_table_name)
+    # validate that the table has expected amount of lines
+    assert len(expected_data) == len(actual_data), \
+        f"Expected amount of records '{len(expected_data)}', Actual:{len(actual_data)}"
+    db_codes = [i[consts.COLUMN_CODE] for i in actual_data]
+    # validate that the keys are as expected
+    assert all(elem in db_codes for elem in expected_data.keys()), \
+        "Not all codes are equal"
+    # validate for each key that it has the expected value
+    for line in actual_data:
+        code_items = expected_data[line[consts.COLUMN_CODE]]
+        assert code_items[consts.COLUMN_DESC] == line[consts.COLUMN_DESC], \
+            f'The description is wrong,\nExpected:' \
+            f'{code_items[consts.COLUMN_DESC]}\nActual: {line[consts.COLUMN_DESC]}'
+        assert code_items[consts.COLUMN_LIST] == line[consts.COLUMN_LIST], \
+            f'The list is wrong,\nExpected:' \
+            f'{code_items[consts.COLUMN_LIST]}\nActual: {line[consts.COLUMN_LIST]}'
+        assert code_items[consts.COLUMN_DURATION] == line[consts.COLUMN_DURATION], \
+            f'The duration is wrong,\nExpected:' \
+            f'{code_items[consts.COLUMN_DURATION]}\nActual: {line[consts.COLUMN_DURATION]}'
